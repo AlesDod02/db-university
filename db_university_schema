@@ -1,0 +1,101 @@
+USE `db_university_schema`
+
+create table departments(
+name VARCHAR(100) not null,
+address VARCHAR(100) not null,
+phone INT,
+email VARCHAR(50),
+website VARCHAR(50),
+head_of_department VARCHAR(50),
+id INT not null auto_increment,
+primary key (id)
+);
+create table degrees(
+name VARCHAR(100),
+address VARCHAR(100),
+`level` INT,
+email VARCHAR(50),
+website VARCHAR(50),
+id INT not null auto_increment,
+primary key (id)
+);
+alter table degrees 
+add column department_id INT;
+
+alter table degrees 
+add foreign key (department_id) references departments(id);
+
+create table `students`(
+name VARCHAR(100),
+surname VARCHAR(100),
+date_of_birth DATE,
+fiscal_code VARCHAR(20),
+enrolment_date DATE,
+registration_number INT,
+email VARCHAR(50),
+id INT not null auto_increment,
+primary key (id)
+);
+alter table `students`
+add column degree_id INT;
+
+alter table students
+add foreign key (degree_id) references degrees(id);
+
+INSERT INTO db_university_schema.departments
+(name, address, phone, email, website, head_of_department)
+VALUES('ITALIANO', 'roma via prova', 43274622, 'ITALIANO@email.com', 'www.ITALIANO.com', 'prova prova');
+INSERT INTO db_university_schema.departments
+(name, address, phone, email, website, head_of_department)
+VALUES('matematica', 'roma via prova', 43274672, 'matematica@email.com', 'www.matematica.com', 'prova prova');
+INSERT INTO db_university_schema.departments
+(name, address, phone, email, website, head_of_department)
+VALUES('scienze', 'roma via prova', 43274772, 'scienze@email.com', 'www.scienze.com', 'prova prova');
+INSERT INTO db_university_schema.departments
+(name, address, phone, email, website, head_of_department)
+VALUES('storia', 'roma via prova', 43272772, 'storia@email.com', 'www.storia.com', 'prova prova');
+INSERT INTO db_university_schema.departments
+(name, address, phone, email, website, head_of_department)
+VALUES('inglese', 'roma via prova', 43462772, 'inglese@email.com', 'www.inglese.com', 'prova prova');
+INSERT INTO db_university_schema.departments
+(name, address, phone, email, website, head_of_department)
+VALUES('geografia', 'roma via prova', 45462772, 'geografia@email.com', 'www.geografia.com', 'prova prova');
+
+-- ELIMINO UN ELEMENTO 
+DELETE FROM departments WHERE id = 1;
+
+-- MODIFICO UN ELEMENTO
+UPDATE departments SET name='Fisica', address='ROMA  via roma', phone=333333, email='fisica@email.com', website='www.fisica.it', head_of_department='prova prova' WHERE id=3;
+-- INSERISCO I DEGREES
+INSERT INTO db_university_schema.degrees
+(name, address, `level`, email, website, department_id)
+VALUES('prova prova', 'Via Roma, 71', 14, 'prova@email.com', 'www.prova.it', 2);
+INSERT INTO db_university_schema.degrees
+(name, address, `level`, email, website, department_id)
+VALUES('prova prova2', 'Via Roma, 71', 15, 'prova2@email.com', 'www.prova2.it', 3);
+INSERT INTO db_university_schema.degrees
+(name, address, `level`, email, website, department_id)
+VALUES('prova prova3', 'Via Roma, 71', 16, 'prova3@email.com', 'www.prova.it', 4);
+INSERT INTO db_university_schema.degrees
+(name, address, `level`, email, website, department_id)
+VALUES('prova prova4', 'Via Roma, 71', 17, 'prova4@email.com', 'www.prova.it', 5);
+INSERT INTO db_university_schema.degrees
+(name, address, `level`, email, website, department_id)
+VALUES('prova prova4', 'Via Roma, 71', 17, 'prova4@email.com', 'www.prova.it', 6);
+
+-- AGGIUNGO I DATI DEGLI STUDENTI
+INSERT INTO db_university_schema.students
+(name, surname, date_of_birth, fiscal_code, enrolment_date, registration_number, email, degree_id)
+VALUES('Alessandro', 'Dodaro', '2002/03/28', 'DFSAFUH23', '2018/09/17', 876, 'ALESSANDRODODARO@EMAIL.it', 2);
+INSERT INTO db_university_schema.students
+(name, surname, date_of_birth, fiscal_code, enrolment_date, registration_number, email, degree_id)
+VALUES('Alessandro2', 'Dodaro2', '2002/03/28', 'DFSAFUH24', '2018/09/17', 877, 'ALESSANDRODODARO2@EMAIL.it', 3);
+INSERT INTO db_university_schema.students
+(name, surname, date_of_birth, fiscal_code, enrolment_date, registration_number, email, degree_id)
+VALUES('Alessandro3', 'Dodaro3', '2002/03/28', 'DFSAFUH234', '2018/09/17', 878, 'ALESSANDRODODARO3@EMAIL.it', 4);
+INSERT INTO db_university_schema.students
+(name, surname, date_of_birth, fiscal_code, enrolment_date, registration_number, email, degree_id)
+VALUES('Alessandro4', 'Dodaro4', '2002/03/28', 'DFSAFUH235', '2018/09/17', 879, 'ALESSANDRODODARO4@EMAIL.it', 5);
+INSERT INTO db_university_schema.students
+(name, surname, date_of_birth, fiscal_code, enrolment_date, registration_number, email, degree_id)
+VALUES('Alessandro5', 'Dodaro5', '2002/03/28', 'DFSAFUH236', '2018/09/17', 880, 'ALESSANDRODODARO5@EMAIL.it', 6);
